@@ -1,6 +1,7 @@
 const { Client, GatewayIntentBits } = require('discord.js');
 const feedparser = require('feedparser-promised');
 const dotenv = require('dotenv');
+const express = require('express');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -51,3 +52,15 @@ async function checkMediumFeed() {
 }
 
 client.login(process.env.DISCORD_BOT_TOKEN);
+
+// Express server setup
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+    res.send('Bot is alive!');
+});
+
+app.listen(port, () => {
+    console.log(`Bot web server started on http://localhost:${port}`);
+});
